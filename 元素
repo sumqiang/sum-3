@@ -1,0 +1,29 @@
+import requests
+from selenium import webdriver
+from lxml import html
+import re
+import time
+import json
+from loguru import logger
+import os
+from openpyxl import Workbook
+from openpyxl import load_workbook
+import datetime
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from jpype import *
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+# 手动准备工作，窗口1metamask，窗口2zapper登录状态
+# 启用带插件的浏览器
+profile = webdriver.FirefoxProfile(
+    "C:/Users/Administrator/AppData/Roaming/Mozilla/Firefox/Profiles/uqlszdiw.default-release-1634646824861")
+driver = webdriver.Firefox(firefox_profile=profile)
+driver.get('https://www.baidu.com/')
+# moz-extension://67f62351-844f-448d-9b85-6335854073c3/home.html
+time.sleep(30)
+windows = driver.window_handles
+driver.switch_to.window(windows[1])
+driver.find_element_by_xpath('//button[@class="table_button"]').click()
